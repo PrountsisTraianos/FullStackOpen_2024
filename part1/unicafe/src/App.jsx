@@ -1,40 +1,11 @@
 /* eslint-disable react/prop-types */
- import { useState } from 'react'
+ import { useState } from 'react' 
 
- const Header = ({text}) => {
-  return(
-    <div>
-      <h1> {text} </h1>
-    </div>
-  )
- }
-const Button = (props) => {
-  return (
-  <div>
-    <button onClick={props.handleClick} >
-      {props.text}
-    </button>
-  </div>
-  )
-}
+ const Header = ({text}) => <h1> {text} </h1>
 
-const StatisticLine = ({text, value}) =>{
-  return (
-    <>
-      <tr>
-        <td>{text} </td>
-        <td>{value} </td>
-      </tr>
-    </>
+const Button = (props) => <button onClick={props.handleClick} >{props.text}</button>
 
-
-
-    // <div>
-    //   <p>{text}: {value} </p>
-    // </div>
-
-  )
-}
+const StatisticLine = ({text, value}) => <tr><td>{text} </td><td>{value} </td></tr>
 
 const Statistics = ({good, neutral, bad}) =>{
 
@@ -52,7 +23,6 @@ const Statistics = ({good, neutral, bad}) =>{
   }
 
   return(
-    <>
       <table>
       <StatisticLine text={"good"} value={good} />
       <StatisticLine text={"neutral"} value={neutral} />
@@ -61,7 +31,6 @@ const Statistics = ({good, neutral, bad}) =>{
       <StatisticLine text={"average"} value={average} />
       <StatisticLine text={"positive"} value={positive + '% '} />
       </table>
-    </>
   )
 }
 
@@ -71,21 +40,11 @@ const Statistics = ({good, neutral, bad}) =>{
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-  const handleGoodClick = () =>{
-    return (
-      setGood(good + 1)
-    )
-  } 
-  const handleNeutralClick = () =>{
-    return (
-      setNeutral(neutral + 1)
-    )
-  } 
-  const handleBadClick = () =>{
-    return (
-      setBad(bad + 1)
-    )
-  } 
+  const handleGoodClick = () =>{ setGood(good + 1)}
+
+  const handleNeutralClick = () =>{ setNeutral(neutral + 1)}
+   
+  const handleBadClick = () =>{ setBad(bad + 1) } 
   
   return (
   <div>
