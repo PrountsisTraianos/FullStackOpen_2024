@@ -18,9 +18,21 @@ const Button = (props) => {
   )
 }
 
+const StatisticLine = ({text, value}) =>{
+  return (
+    <div>
+      <p>{text}: {value} </p>
+    </div>
+
+  )
+}
+
 const Statistics = ({good, neutral, bad}) =>{
 
   let total = good+neutral+bad
+  let average = (good*1 + neutral*0 + bad*-1)/total
+  let positive = good*100/total
+
   if (total === 0 ) 
   { 
     return (
@@ -32,12 +44,12 @@ const Statistics = ({good, neutral, bad}) =>{
 
   return(
     <div>
-      <p>good:{good}</p>
-      <p>neutral:{neutral}</p>
-      <p>bad:{bad}</p>
-      <p>all:{total}</p>
-      <p>average:{(good*1 + neutral*0 + bad*-1)/total} </p>
-      <p>positive:{good*100/total} % </p>
+      <StatisticLine text={"good"} value={good} />
+      <StatisticLine text={"neutral"} value={neutral} />
+      <StatisticLine text={"bad"} value={bad} />
+      <StatisticLine text={"total"} value={total} />
+      <StatisticLine text={"average"} value={average} />
+      <StatisticLine text={"positive"} value={positive + '% '} />
     </div>
   )
 }
@@ -64,10 +76,6 @@ const Statistics = ({good, neutral, bad}) =>{
     )
   } 
   
-  // console.log('good clicks', good )
-  // console.log('neutral clicks', neutral )
-  // console.log('bad clicks', bad )
-
   return (
   <div>
     <Header text = {'give feedback'}  />
