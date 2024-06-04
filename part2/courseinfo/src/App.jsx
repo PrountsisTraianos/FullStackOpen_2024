@@ -4,12 +4,11 @@ const Header = ({ course }) => <h1>{course.name}</h1>
 
 const Total = ({ course }) => 
 {
-  let total = course.parts.reduce((previousPart, currentPart ) => {return previousPart + currentPart.exercises},0) 
-  console.log("sum", total);
+  let total = course.parts.reduce((summedPart, currentPart ) => {return summedPart + currentPart.exercises},0) 
+  // console.log("sum", total);
 
   return(
     <p>Number of exercises {total}</p>
-
   )
 }
 
