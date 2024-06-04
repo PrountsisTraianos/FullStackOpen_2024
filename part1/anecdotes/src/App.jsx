@@ -1,4 +1,10 @@
+/* eslint-disable react/prop-types */
+
 import { useState } from 'react'
+
+const Button = ({handleClick, text}) => <button onClick = {handleClick} > {text}  </button>
+
+const Anecdote = ({anecdote}) =><div><h2>{anecdote}</h2></div>
 
 const App = () => {
   const anecdotes = [
@@ -14,11 +20,16 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
 
+  const nextAnecdote = () => setSelected(Math.floor(Math.random()*(anecdotes.length)))
+  // console.log('generated number', selected )
+
+  console.log(anecdotes[0])
+
+
   return (
     <div>
-      <p>test</p>
-
-      {/* {anecdotes[selected]} */}
+      <Anecdote anecdote = {anecdotes[selected]} />
+      <Button handleClick = {nextAnecdote} text = {"next anecdote"} /> 
     </div>
   )
 }
