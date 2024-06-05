@@ -14,10 +14,10 @@ const Total = ({ course }) =>
 }
 
 const Part = ({ course }) => <>{ course.parts.map( part =>
-    <li key = { part.id } > { part.name } { part.exercises } </li>)} 
+    <p key = { part.id } > { part.name } { part.exercises } </p>)} 
   </>
 
-const Content = ({ course }) => <ul> <Part course = { course } /> </ul>
+const Content = ({ course }) => <div> <Part course = { course } /> </div>
 
 const Course = ({ course }) =>
   <> 
