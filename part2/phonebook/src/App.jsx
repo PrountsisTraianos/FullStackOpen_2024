@@ -1,31 +1,24 @@
 /* eslint-disable react/prop-types */
-
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useEffect, useState } from 'react'
 
 import Header from './components/Header'
 import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
 import People from './components/People'
+import personServices from './services/person'
 
-const App = () => {
-
-
-  useEffect(() => {
-    axios
-      .get(baseURL)
-      .then(response =>{
-        setPersons(response.data)
-      })
-  },[] )  
-
-
-  const baseURL = 'http://localhost:3001/persons'
+const App = () => {  
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setNewFilter] = useState('')
-  
+
+  useEffect( ()=> {
+    personServices
+    .getAll()
+    .then(response => setPersons(response.data))
+  },[])
+
   const addPerson = (event) => {
     event.preventDefault();
     const personObject = {
@@ -38,13 +31,8 @@ const App = () => {
       alert(`${personObject.name} is already added to phonebook`)
       return
     }
-    axios
-      .post(baseURL, personObject)
-      .then(response => {
-        console.log(response)
-      })
-
-      
+    personServices
+    .create(personObject)
     setPersons(persons.concat(personObject))
     setNewName('')
     setNewNumber('')
@@ -85,4 +73,5 @@ const App = () => {
     </div>
   )
 }
+
 export default App
