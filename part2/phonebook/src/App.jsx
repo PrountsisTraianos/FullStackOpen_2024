@@ -7,12 +7,13 @@ import Filter from './components/Filter'
 import People from './components/People'
 import personServices from './services/person'
 
+
 const App = () => {  
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setNewFilter] = useState('')
-
+  
   useEffect( ()=> {
     personServices
     .getAll()
@@ -52,7 +53,19 @@ const App = () => {
     event.preventDefault();
     setNewFilter(event.target.value);
   }
-  
+  const handleDeleteID = (event) =>{
+    // can't delete unless you reload 
+    event.preventDefault();
+    const deleteID = event.target.value
+    const toDeletePerson = persons.find(p => p.id === deleteID)  
+    // console.log(toDeletePerson.name);
+    
+    if(window.confirm(`Delete ${toDeletePerson.name}?` )){
+    
+      personServices.deleteEntryBy(deleteID)
+      setPersons(persons.filter( p => p.id !== deleteID ))
+  } 
+  }
   return (
     <div>
       <Header title={"Phonebook"} />
@@ -68,7 +81,7 @@ const App = () => {
 
       <Header title={"Numbers"} />
       
-      <People filter = {filter} people = {persons} />
+      <People filter = {filter} people = {persons}  handleDeleteID={handleDeleteID} />
 
     </div>
   )
