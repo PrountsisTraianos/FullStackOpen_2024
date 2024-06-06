@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
+import Header from './components/Header'
+import PersonForm from './components/PersonForm'
+import Filter from './components/Filter'
+import People from './components/People'
 
-const Header = ({title}) => <h2> {title} </h2>
-
-const Number = ({person}) => <p> {person.name} {person.number} </p>
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -49,30 +50,23 @@ const App = () => {
     setNewFilter(event.target.value);
   }
   
-  const mapPerson = (filter) =>
-     persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase())).map((person) =>
-       <Number key={person.name} person ={person}/>)
-
   return (
     <div>
       <Header title={"Phonebook"} />
-      <div>
-        filter shown with <input value ={filter} onChange={handleFilterChange} />
-      </div>
+      
+      <Filter filter ={filter} handleFilterChange={handleFilterChange} />
+      
       <Header title={"add a new"} />
-      <form onSubmit={addPerson}>
-        <div>
-          name: <input value ={newName} onChange={handleNameChange} />
-        </div>
-        <div>
-          number: <input value ={newNumber} onChange={handleNumberChange} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+
+      <PersonForm addPerson={addPerson} 
+      newName={newName} handleNameChange={handleNameChange} 
+      newNumber={newNumber} handleNumberChange={handleNumberChange} 
+      />
+
       <Header title={"Numbers"} />
-      <div>{mapPerson(filter)}</div>
+      
+      <People filter = {filter} people = {persons} />
+
     </div>
   )
 }
