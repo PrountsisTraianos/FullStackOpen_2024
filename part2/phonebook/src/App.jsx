@@ -10,14 +10,17 @@ import People from './components/People'
 
 const App = () => {
 
+
   useEffect(() => {
     axios
-      .get('http://localhost:3001/persons')
+      .get(baseURL)
       .then(response =>{
         setPersons(response.data)
       })
   },[] )  
 
+
+  const baseURL = 'http://localhost:3001/persons'
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
@@ -35,6 +38,13 @@ const App = () => {
       alert(`${personObject.name} is already added to phonebook`)
       return
     }
+    axios
+      .post(baseURL, personObject)
+      .then(response => {
+        console.log(response)
+      })
+
+      
     setPersons(persons.concat(personObject))
     setNewName('')
     setNewNumber('')
